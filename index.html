@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnexa Ai</title>
+    <meta name="description" content="All-in-one AI workspace combining specialized tools for writing, coding, career, finance, education, social media, and business analytics.">
+    
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            /* Dark Theme Colors (Default) */
+            --bg-main: #0B0D12;
+            --bg-sidebar: #101319;
+            --bg-card: #151922;
+            --bg-elevated: #1A1F2A;
+            --text-primary: #F5F7FA;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --border-color: #252B36;
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #6366F1;
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-main: #FFFFFF;
+            --bg-sidebar: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-elevated: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border-color: #E2E8F0;
+            --accent-primary: #7C3AED;
+            --accent-secondary: #6366F1;
+            --accent-glow: rgba(124, 58, 237, 0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Base & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-sm { padding: 0.4rem 0.75rem; font-size: 0.8rem; }
+        .btn-icon { padding: 0.5rem; border-radius: var(--radius-sm); }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 1rem; }
+        .form-label { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); }
+        .form-control, .form-select {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        textarea.form-control { min-height: 100px; resize: vertical; }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .toast {
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            pointer-events: auto;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Modal System */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 90%; max-width: 500px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-box { transform: scale(1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .modal-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
+
+        /* Public Landing Page */
+        #public-landing { width: 100%; display: block; }
+        
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
+            background: rgba(11, 13, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.85); }
+
+        .brand-logo {
+            display: flex; align-items: center; gap: 0.625rem;
+            font-size: 1.25rem; font-weight: 800; color: var(--text-primary);
+            text-decoration: none; cursor: pointer;
+        }
+
+        .brand-logo i { color: var(--accent-primary); }
+
+        .nav-links { display: flex; gap: 1.75rem; align-items: center; list-style: none; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: var(--transition); }
+        .nav-link:hover { color: var(--accent-primary); }
+
+        .hero {
+            padding: 9rem 2rem 5rem;
+            max-width: 1200px; margin: 0 auto;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.25rem);
+            font-weight: 800; line-height: 1.1; margin: 1.25rem 0;
+            background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem; color: var(--text-secondary);
+            max-width: 680px; margin-bottom: 2rem;
+        }
+
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+        .hero-preview {
+            margin-top: 4rem; width: 100%; max-width: 1000px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 80px var(--accent-glow);
+            overflow: hidden; padding: 0.5rem;
+        }
+        .hero-preview-bar {
+            height: 32px; background: var(--bg-sidebar); border-radius: var(--radius-md) var(--radius-md) 0 0;
+            display: flex; align-items: center; padding: 0 1rem; gap: 0.5rem;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #EF4444; }
+        .dot:nth-child(2) { background: #F59E0B; }
+        .dot:nth-child(3) { background: #22C55E; }
+
+        .section-padding { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+        .categories-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;
+        }
+
+        .cat-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .cat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px var(--accent-glow);
+        }
+
+        .cat-icon {
+            width: 44px; height: 44px; border-radius: var(--radius-md);
+            background: var(--accent-glow); color: var(--accent-primary);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.25rem; font-size: 1.25rem;
+        }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .price-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column;
+            position: relative;
+        }
+        .price-card.featured { border-color: var(--accent-primary); box-shadow: 0 0 30px var(--accent-glow); }
+
+        .faq-accordion { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+        .faq-question { padding: 1.25rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 1.25rem 1.25rem; color: var(--text-secondary); display: none; font-size: 0.9375rem; }
+        .faq-item.active .faq-answer { display: block; }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 2rem 2rem; background: var(--bg-sidebar); margin-top: 4rem;
+        }
+
+        /* Dashboard Architecture */
+        #app-dashboard { display: none; min-height: 100vh; background: var(--bg-main); }
+        .dash-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px; background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+            transition: var(--transition); flex-shrink: 0; z-index: 40;
+        }
+
+        .sidebar-header { padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); }
+        .sidebar-menu { padding: 1rem 0.75rem; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.25rem; }
+        .menu-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); padding: 0.75rem 0.75rem 0.25rem; letter-spacing: 0.05em; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.625rem 0.75rem; border-radius: var(--radius-md);
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.875rem; font-weight: 500; cursor: pointer;
+            transition: var(--transition); border: none; background: transparent; width: 100%; text-align: left;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--bg-elevated); color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            color: var(--accent-primary); font-weight: 600;
+        }
+
+        .nav-item i { font-size: 1.1rem; width: 20px; }
+
+        /* Dashboard Main View Area */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+        .topbar {
+            height: 64px; background-color: var(--bg-sidebar);
+            border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 1.5rem; flex-shrink: 0;
+        }
+
+        .topbar-search {
+            position: relative; width: 320px;
+        }
+        .topbar-search input {
+            padding-left: 2.25rem; height: 38px; font-size: 0.8125rem;
+        }
+        .topbar-search i {
+            position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+
+        .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+        .content-area { flex: 1; overflow-y: auto; padding: 1.75rem; background-color: var(--bg-main); }
+
+        /* Workspace Views */
+        .workspace-view { display: none; }
+        .workspace-view.active { display: block; animation: fadeIn 0.25s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Workspace Grid Split Layout */
+        .tool-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 1024px) { .tool-layout { grid-template-columns: 1fr; } }
+
+        .panel-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem; box-shadow: var(--shadow-sm);
+        }
+
+        .output-box {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem; min-height: 250px; font-size: 0.875rem;
+            color: var(--text-primary); white-space: pre-wrap; font-family: var(--font-sans);
+            position: relative;
+        }
+
+        .output-box.code-mode {
+            font-family: var(--font-mono); font-size: 0.8125rem; background: #07090D; color: #E2E8F0;
+        }
+
+        .output-toolbar { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.75rem; }
+
+        /* Chat Assistant View */
+        .chat-container { display: flex; flex-direction: column; height: calc(100vh - 120px); }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+        .message-bubble { max-width: 75%; padding: 0.875rem 1.125rem; border-radius: var(--radius-lg); font-size: 0.875rem; line-height: 1.5; }
+        .message-user { align-self: flex-end; background-color: var(--accent-primary); color: #FFF; border-bottom-right-radius: 2px; }
+        .message-ai { align-self: flex-start; background-color: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-left-radius: 2px; }
+
+        /* Dashboard Overview Grid */
+        .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-md); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .sidebar { position: fixed; left: -260px; height: 100vh; }
+            .sidebar.mobile-open { left: 0; }
+            .topbar-search { display: none; }
+            .hero h1 { font-size: 2.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Reusable Modal System -->
+    <div class="modal-overlay" id="app-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal()"><i data-lucide="x"></i></button>
+            </div>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- 1. PUBLIC LANDING PAGE -->
+    <div id="public-landing">
+        <nav class="navbar">
+            <div class="brand-logo" onclick="showLanding()">
+                <i data-lucide="sparkles"></i>
+                <span>Omnexa AI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#categories" class="nav-link">AI Tools</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" aria-label="Toggle Theme"><i data-lucide="sun" class="theme-icon"></i></button>
+                <button class="btn btn-primary" onclick="launchApp('dashboard')">Launch Dashboard</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <span class="badge"><i data-lucide="zap"></i> Intelligence for Every Workflow</span>
+            <h1>One Intelligent Workspace for All Your AI Tasks</h1>
+            <p>Omnexa AI unifies writing, coding, career, finance, education, social media, and analytics tools into a single seamless SaaS dashboard.</p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="launchApp('dashboard')">Open Workspace Dashboard <i data-lucide="arrow-right"></i></button>
+                <a href="#categories" class="btn btn-secondary">Explore 13 AI Categories</a>
+            </div>
+
+            <div class="hero-preview">
+                <div class="hero-preview-bar">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span style="font-size:0.75rem; color:var(--text-muted); margin-left: auto;">app.omnexa.ai/dashboard</span>
+                </div>
+                <div style="padding: 1.5rem; text-align: left; background: var(--bg-main);">
+                    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; min-height: 240px;">
+                        <div style="background: var(--bg-sidebar); border-radius: var(--radius-md); padding: 1rem; border:1px solid var(--border-color);">
+                            <div style="height: 12px; width: 60%; background: var(--accent-primary); border-radius: 4px; margin-bottom: 1rem;"></div>
+                            <div style="height: 8px; width: 80%; background: var(--border-color); border-radius: 4px; margin-bottom: 0.5rem;"></div>
+                            <div style="height: 8px; width: 70%; background: var(--border-color); border-radius: 4px; margin-bottom: 0.5rem;"></div>
+                            <div style="height: 8px; width: 90%; background: var(--border-color); border-radius: 4px;"></div>
+                        </div>
+                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding: 1.25rem; border:1px solid var(--border-color);">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--accent-primary);">&gt; WriteFlow AI Assistant Active</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">"Generating targeted strategic campaign copy for tech startup launch sequence..."</p>
+                            <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-main); border-radius: var(--radius-sm); border:1px solid var(--border-color); font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+                                [STATUS 200] Optimized 3 content variations across tone spectrum (Professional, Bold, Concise).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="categories" class="section-padding">
+            <div class="section-header">
+                <span class="badge">Comprehensive Suite</span>
+                <h2 class="section-title">13 Specialized AI Workspaces</h2>
+                <p class="section-desc">Purpose-built intelligent tools tailored for creators, developers, students, and businesses.</p>
+            </div>
+            <div class="categories-grid" id="landing-categories-grid">
+                <!-- Rendered Dynamically -->
+            </div>
+        </section>
+
+        <section id="features" class="section-padding" style="background: var(--bg-sidebar); max-width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <h2 class="section-title">Engineered for Commercial Speed</h2>
+                    <p class="section-desc">Replace dozens of fragmented AI subscriptions with one unified high-performance platform.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div style="background: var(--bg-card); padding: 1.75rem; border-radius: var(--radius-lg); border:1px solid var(--border-color);">
+                        <i data-lucide="layers" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
+                        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Single Unified Dashboard</h3>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">Access content generation, code output, financial modeling, and data analytics without switching tabs.</p>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1.75rem; border-radius: var(--radius-lg); border:1px solid var(--border-color);">
+                        <i data-lucide="hard-drive" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
+                        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Local Data Persistence</h3>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">Your project history, saved prompts, and settings are preserved directly inside your browser storage.</p>
+                    </div>
+                    <div style="background: var(--bg-card); padding: 1.75rem; border-radius: var(--radius-lg); border:1px solid var(--border-color);">
+                        <i data-lucide="sliders" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
+                        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Precision Control Knobs</h3>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">Fine-tune tone, audience target, complexity level, and code languages with dedicated control suites.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="section-padding">
+            <div class="section-header">
+                <span class="badge">Pricing Plans</span>
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-desc">Choose the ideal workspace plan for your productivity needs. (Illustrative Demo Pricing)</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3 style="font-size: 1.25rem;">Starter Plan</h3>
+                    <div style="font-size: 2.25rem; font-weight: 800; margin: 1rem 0;">$0 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">/ month</span></div>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Perfect for exploring Omnexa AI tools.</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; font-size: 0.875rem; color: var(--text-secondary);">
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Access to all 13 AI Categories</li>
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Basic response generation</li>
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> LocalStorage data saving</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="launchApp('dashboard')">Start Free Demo</button>
+                </div>
+                <div class="price-card featured">
+                    <span class="badge" style="position: absolute; top: -12px; right: 20px;">Most Popular</span>
+                    <h3 style="font-size: 1.25rem;">Pro Workspace</h3>
+                    <div style="font-size: 2.25rem; font-weight: 800; margin: 1rem 0;">$29 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">/ month</span></div>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">For power users and independent professionals.</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; font-size: 0.875rem; color: var(--text-secondary);">
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Everything in Starter</li>
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Unlimited local saved projects</li>
+                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Advanced code & data analytics</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="launchApp('dashboard')">Launch Pro Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-padding" style="background: var(--bg-sidebar); max-width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-accordion">
+                    <div class="faq-item active" onclick="toggleFaq(this)">
+                        <div class="faq-question">What is Omnexa AI? <i data-lucide="chevron-down"></i></div>
+                        <div class="faq-answer">Omnexa AI is an all-in-one AI productivity workspace bringing together specialized generators for copy, code, career, finance, learning, video scripts, and data analytics into one single interface.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">Does this platform run in browser? <i data-lucide="chevron-down"></i></div>
+                        <div class="faq-answer">Yes! Omnexa AI is built as an ultra-fast frontend application. All saved items and settings persist locally inside your browser via LocalStorage.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">Are the AI outputs functional? <i data-lucide="chevron-down"></i></div>
+                        <div class="faq-answer">Yes, all 13 tool categories feature dynamic input controls that generate tailored, context-aware sample results ready to copy and save.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div class="brand-logo">
+                    <i data-lucide="sparkles"></i>
+                    <span>Omnexa AI</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Omnexa AI Platform Inc. Intelligence for Every Workflow.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 2. APPLICATION DASHBOARD -->
+    <div id="app-dashboard">
+        <div class="dash-container">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="app-sidebar">
+                <div class="sidebar-header">
+                    <div class="brand-logo" onclick="showLanding()" style="font-size: 1.1rem;">
+                        <i data-lucide="sparkles"></i>
+                        <span>Omnexa AI</span>
+                    </div>
+                    <button class="btn btn-secondary btn-sm btn-icon" onclick="toggleMobileSidebar()" style="display: none;" id="sidebar-close-btn"><i data-lucide="x"></i></button>
+                </div>
+                <div class="sidebar-menu">
+                    <button class="nav-item active" onclick="switchTab('overview')"><i data-lucide="layout-dashboard"></i> Overview</button>
+                    <button class="nav-item" onclick="switchTab('assistant')"><i data-lucide="bot"></i> AI Assistant</button>
+                    <button class="nav-item" onclick="switchTab('projects')"><i data-lucide="folder"></i> Saved Projects</button>
+                    <button class="nav-item" onclick="switchTab('history')"><i data-lucide="clock"></i> Recent History</button>
+                    
+                    <div class="menu-label">13 AI Categories</div>
+                    <div id="sidebar-categories-list">
+                        <!-- Dynamic Sidebar Nav Items -->
+                    </div>
+
+                    <div class="menu-label">Account & System</div>
+                    <button class="nav-item" onclick="switchTab('settings')"><i data-lucide="settings"></i> Workspace Settings</button>
+                </div>
+            </aside>
+
+            <!-- Main Wrapper -->
+            <main class="main-wrapper">
+                <!-- Topbar -->
+                <header class="topbar">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <button class="btn btn-secondary btn-sm btn-icon" onclick="toggleMobileSidebar()"><i data-lucide="menu"></i></button>
+                        <div class="topbar-search">
+                            <i data-lucide="search"></i>
+                            <input type="text" class="form-control" placeholder="Search AI tools or saved items..." id="global-search-input" oninput="handleGlobalSearch(this.value)">
+                        </div>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="btn btn-secondary btn-sm" onclick="showLanding()"><i data-lucide="external-link"></i> Landing Page</button>
+                        <button class="btn btn-secondary btn-icon" onclick="toggleTheme()"><i data-lucide="sun" class="theme-icon"></i></button>
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; cursor: pointer;" onclick="switchTab('settings')">OA</div>
+                    </div>
+                </header>
+
+                <!-- Content Scroll Area -->
+                <div class="content-area">
+
+                    <!-- VIEW: DASHBOARD OVERVIEW -->
+                    <div id="view-overview" class="workspace-view active">
+                        <div style="margin-bottom: 1.75rem;">
+                            <h1 style="font-size: 1.5rem; font-weight: 800;">Welcome back, Operator</h1>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem;">Select an AI workspace below or query the AI assistant to start your workflow.</p>
+                        </div>
+
+                        <div class="dash-grid">
+                            <div class="stat-card">
+                                <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Active AI Tools</span>
+                                <div style="font-size: 1.75rem; font-weight: 800; margin-top: 0.25rem;">13 Workspaces</div>
+                            </div>
+                            <div class="stat-card">
+                                <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Saved Projects</span>
+                                <div style="font-size: 1.75rem; font-weight: 800; margin-top: 0.25rem;" id="stat-saved-count">0 Items</div>
+                            </div>
+                            <div class="stat-card">
+                                <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">System Status</span>
+                                <div style="font-size: 1rem; font-weight: 700; margin-top: 0.5rem; color: var(--success); display: flex; align-items: center; gap: 0.35rem;">
+                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success);"></span> Operational
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">AI Workspaces Catalog</h3>
+                        <div class="categories-grid" id="dash-categories-grid">
+                            <!-- Rendered Dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- VIEW: AI CHAT ASSISTANT -->
+                    <div id="view-assistant" class="workspace-view">
+                        <div class="chat-container">
+                            <div style="padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h2 style="font-size: 1.25rem; font-weight: 700;">Omnexa Unified AI Assistant</h2>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary);">Ask any question or request content across writing, code, and strategy.</p>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="clearChat()"><i data-lucide="trash-2"></i> Clear Chat</button>
+                            </div>
+                            <div class="chat-messages" id="chat-messages-box">
+                                <div class="message-bubble message-ai">
+                                    Hello! I am your unified Omnexa AI Assistant. How can I help you streamline your workflow today?
+                                </div>
+                            </div>
+                            <div style="padding-top: 1rem; display: flex; gap: 0.5rem;">
+                                <input type="text" class="form-control" id="chat-input" placeholder="Type your message or request..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+                                <button class="btn btn-primary" onclick="sendChatMessage()"><i data-lucide="send"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIEW: SAVED PROJECTS -->
+                    <div id="view-projects" class="workspace-view">
+                        <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Saved Items &amp; History</h2>
+                        <div id="saved-items-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Rendered Dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- VIEW: SETTINGS -->
+                    <div id="view-settings" class="workspace-view">
+                        <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Workspace Settings</h2>
+                        <div class="panel-card" style="max-width: 600px;">
+                            <div class="form-group">
+                                <label class="form-label">User Persona Name</label>
+                                <input type="text" class="form-control" value="Operator Mode" id="setting-user-name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Theme Mode Preference</label>
+                                <select class="form-select" onchange="setTheme(this.value)" id="setting-theme-select">
+                                    <option value="dark">Dark Theme (Default)</option>
+                                    <option value="light">Light Theme</option>
+                                </select>
+                            </div>
+                            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                <button class="btn btn-primary" onclick="saveSettings()">Save Preferences</button>
+                                <button class="btn btn-secondary" onclick="clearAllData()">Clear Local Storage Data</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DYNAMIC 13 CATEGORY WORKSPACE VIEWS -->
+                    <div id="dynamic-tool-workspaces"></div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Registry for 13 AI Categories
+        const CATEGORIES = [
+            { id: 'writeflow', name: 'WriteFlow AI', icon: 'pen-tool', desc: 'Content creation, blog posts, and marketing copy suite.', color: '#8B5CF6' },
+            { id: 'careerly', name: 'Careerly AI', icon: 'briefcase', desc: 'Resume builder, cover letters, and interview prep assistant.', color: '#3B82F6' },
+            { id: 'siteforge', name: 'SiteForge AI', icon: 'globe', desc: 'Website planning, landing page briefs, and structural copy.', color: '#10B981' },
+            { id: 'clipora', name: 'Clipora AI', icon: 'video', desc: 'Video scripts for YouTube, TikTok, and Reels with hooks.', color: '#EF4444' },
+            { id: 'finora', name: 'Finora AI', icon: 'pie-chart', desc: 'Financial planning, budget modeling, and expense analysis.', color: '#F59E0B' },
+            { id: 'studypilot', name: 'StudyPilot AI', icon: 'book-open', desc: 'Study notes summarizer, quiz builder, and flashcard generator.', color: '#6366F1' },
+            { id: 'supportly', name: 'Supportly AI', icon: 'message-square', desc: 'Customer support response builder and ticket management.', color: '#06B6D4' },
+            { id: 'socialpilot', name: 'SocialPilot AI', icon: 'share-2', desc: 'Social media captions, hashtags, and post calendar planner.', color: '#EC4899' },
+            { id: 'estateiq', name: 'EstateIQ AI', icon: 'home', desc: 'Property listings, investment ROI, and lead descriptions.', color: '#14B8A6' },
+            { id: 'meetmind', name: 'MeetMind AI', icon: 'calendar', desc: 'Meeting summary generator, agendas, and action items.', color: '#84CC16' },
+            { id: 'pixelmind', name: 'PixelMind AI', icon: 'image', desc: 'Midjourney/DALL-E prompt builder and visual concept briefs.', color: '#A855F7' },
+            { id: 'codepilot', name: 'CodePilot AI', icon: 'code', desc: 'Code generator, snippet explanation, and debug assistant.', color: '#06B6D4' },
+            { id: 'insightly', name: 'Insightly AI', icon: 'bar-chart-3', desc: 'Data analytics assistant, report summaries, and metric insights.', color: '#64748B' }
+        ];
+
+        // State Management
+        let appState = {
+            theme: localStorage.getItem('omnexa_theme') || 'dark',
+            savedItems: JSON.parse(localStorage.getItem('omnexa_saved') || '[]'),
+            chatHistory: JSON.parse(localStorage.getItem('omnexa_chat') || '[]')
+        };
+
+        // DOM Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderLandingCategories();
+            renderSidebarNav();
+            renderDashboardCategories();
+            renderToolWorkspaces();
+            renderSavedProjects();
+            lucide.createIcons();
+        });
+
+        // Theme Engine
+        function initTheme() {
+            document.documentElement.setAttribute('data-theme', appState.theme);
+            const select = document.getElementById('setting-theme-select');
+            if (select) select.value = appState.theme;
+            updateThemeIcons();
+        }
+
+        function toggleTheme() {
+            appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('omnexa_theme', appState.theme);
+            document.documentElement.setAttribute('data-theme', appState.theme);
+            updateThemeIcons();
+            showToast(`Switched to ${appState.theme} mode`);
+        }
+
+        function setTheme(theme) {
+            appState.theme = theme;
+            localStorage.setItem('omnexa_theme', appState.theme);
+            document.documentElement.setAttribute('data-theme', appState.theme);
+            updateThemeIcons();
+        }
+
+        function updateThemeIcons() {
+            document.querySelectorAll('.theme-icon').forEach(icon => {
+                icon.setAttribute('data-lucide', appState.theme === 'dark' ? 'sun' : 'moon');
+            });
+            lucide.createIcons();
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i data-lucide="check-circle" style="color:var(--accent-primary); width:18px;"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // View Navigation Engine
+        function showLanding() {
+            document.getElementById('public-landing').style.display = 'block';
+            document.getElementById('app-dashboard').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function launchApp(viewId = 'overview') {
+            document.getElementById('public-landing').style.display = 'none';
+            document.getElementById('app-dashboard').style.display = 'block';
+            switchTab(viewId);
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.workspace-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) targetView.classList.add('active');
+
+            const navBtn = document.querySelector(`.nav-item[onclick*="${tabId}"]`);
+            if (navBtn) navBtn.classList.add('active');
+
+            if (window.innerWidth <= 768) {
+                document.getElementById('app-sidebar').classList.remove('mobile-open');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileSidebar() {
+            document.getElementById('app-sidebar').classList.toggle('mobile-open');
+        }
+
+        // FAQ Toggle Component
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        // Render Components
+        function renderLandingCategories() {
+            const grid = document.getElementById('landing-categories-grid');
+            grid.innerHTML = CATEGORIES.map(cat => `
+                <div class="cat-card" onclick="launchApp('${cat.id}')">
+                    <div>
+                        <div class="cat-icon"><i data-lucide="${cat.icon}"></i></div>
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">${cat.name}</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">${cat.desc}</p>
+                    </div>
+                    <div style="margin-top: 1.25rem; font-size: 0.8rem; font-weight: 600; color: var(--accent-primary); display: flex; align-items: center; gap: 0.25rem;">
+                        Open Workspace <i data-lucide="chevron-right" style="width: 14px;"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSidebarNav() {
+            const container = document.getElementById('sidebar-categories-list');
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button class="nav-item" onclick="switchTab('${cat.id}')">
+                    <i data-lucide="${cat.icon}"></i> ${cat.name}
+                </button>
+            `).join('');
+        }
+
+        function renderDashboardCategories() {
+            const grid = document.getElementById('dash-categories-grid');
+            grid.innerHTML = CATEGORIES.map(cat => `
+                <div class="cat-card" onclick="switchTab('${cat.id}')">
+                    <div>
+                        <div class="cat-icon"><i data-lucide="${cat.icon}"></i></div>
+                        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">${cat.name}</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">${cat.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render All 13 Tool Workspaces Dynamically
+        function renderToolWorkspaces() {
+            const container = document.getElementById('dynamic-tool-workspaces');
+            container.innerHTML = CATEGORIES.map(cat => getToolWorkspaceHTML(cat)).join('');
+        }
+
+        function getToolWorkspaceHTML(cat) {
+            return `
+                <div id="view-${cat.id}" class="workspace-view">
+                    <div style="margin-bottom: 1.5rem;">
+                        <span class="badge"><i data-lucide="${cat.icon}"></i> Specialized AI Tool</span>
+                        <h1 style="font-size: 1.5rem; font-weight: 800; margin-top: 0.25rem;">${cat.name}</h1>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">${cat.desc}</p>
+                    </div>
+
+                    <div class="tool-layout">
+                        <!-- Input Control Panel -->
+                        <div class="panel-card">
+                            <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 700;">Parameters &amp; Context</h3>
+                            <div class="form-group">
+                                <label class="form-label">Primary Request / Prompt Context</label>
+                                <textarea class="form-control" id="${cat.id}-prompt" placeholder="Describe what you need generated in detail..."></textarea>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Tone &amp; Style</label>
+                                    <select class="form-select" id="${cat.id}-tone">
+                                        <option value="Professional & Direct">Professional &amp; Direct</option>
+                                        <option value="Creative & Bold">Creative &amp; Bold</option>
+                                        <option value="Technical & Precise">Technical &amp; Precise</option>
+                                        <option value="Casual & Engaging">Casual &amp; Engaging</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Output Format</label>
+                                    <select class="form-select" id="${cat.id}-format">
+                                        <option value="Detailed Breakdown">Detailed Breakdown</option>
+                                        <option value="Executive Summary">Executive Summary</option>
+                                        <option value="Action Bullet Points">Action Bullet Points</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="generateToolOutput('${cat.id}')">
+                                <i data-lucide="sparkles"></i> Generate ${cat.name} Output
+                            </button>
+                        </div>
+
+                        <!-- Output Panel -->
+                        <div class="panel-card">
+                            <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 700;">Generated Workspace Output</h3>
+                            <div class="output-box ${cat.id === 'codepilot' ? 'code-mode' : ''}" id="${cat.id}-output">
+                                <!-- Generated result appears here -->
+                                Click "Generate ${cat.name} Output" to run the local AI model response simulation.
+                            </div>
+                            <div class="output-toolbar">
+                                <button class="btn btn-secondary btn-sm" onclick="copyOutput('${cat.id}-output')"><i data-lucide="copy"></i> Copy Output</button>
+                                <button class="btn btn-secondary btn-sm" onclick="saveToolProject('${cat.id}')"><i data-lucide="bookmark"></i> Save to Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Logic Engine for AI Generation
+        function generateToolOutput(catId) {
+            const prompt = document.getElementById(`${catId}-prompt`).value.trim();
+            const tone = document.getElementById(`${catId}-tone`).value;
+            const format = document.getElementById(`${catId}-format`).value;
+            const outputBox = document.getElementById(`${catId}-output`);
+
+            outputBox.innerText = `[OMNEXA AI PROCESSOR] Synthesizing context...\nTone: ${tone} | Format: ${format}\n\nGenerating output...`;
+
+            setTimeout(() => {
+                const response = getSimulatedResponse(catId, prompt || 'Standard strategic request', tone, format);
+                outputBox.innerText = response;
+                showToast(`Generated output for ${catId.toUpperCase()} AI`);
+            }, 600);
+        }
+
+        function getSimulatedResponse(catId, prompt, tone, format) {
+            const time = new Date().toLocaleDateString();
+            switch (catId) {
+                case 'writeflow':
+                    return `### WRITEFLOW AI SYNTHESIS (${tone})\nTarget Subject: ${prompt}\n\n1. Executive Pitch:\n"Elevate your operational efficiency with Omnexa AI. Designed to convert complex ideas into actionable workflows seamlessly."\n\n2. Key Value Messaging Points:\n- Unified multi-tool suite eliminates context switching.\n- High-velocity AI output structured for immediate deployment.\n- Data privacy prioritized through local storage logic.`;
+
+                case 'careerly':
+                    return `### CAREERLY AI SUMMARY & COVER PROFILE\nPosition Target: ${prompt}\nTone Setting: ${tone}\n\nPROFESSIONAL SUMMARY:\nDriven and results-oriented specialist with proven expertise in implementing high-impact solutions. Adept at turning high-level goals into structured technical deliverables.\n\nRECOMMENDED CORE COMPETENCIES:\n- Strategic Workflow Optimization\n- Technical Project Execution\n- Cross-functional Team Integration`;
+
+                case 'siteforge':
+                    return `### SITEFORGE ARCHITECTURE BRIEF\nProject Brief: ${prompt}\n\nRECOMMENDED LANDING PAGE STRUCTURE:\n1. Hero Section: Bold Value Proposition + Primary CTA Button\n2. Social Proof / Metrics Ribbon: 3 Column statistics callout\n3. Interactive Feature Matrix: Tabs highlighting core workflows\n4. Pricing Tier Breakdown: Flexible card grid\n5. Footer: Compliance & Navigation tree`;
+
+                case 'clipora':
+                    return `### CLIPORA SCRIPT GENERATOR\nTopic: ${prompt}\n\n[HOOK 0:00-0:03]: "Stop wasting 5 hours a day switching between fragmented tools..."\n[BODY 0:04-0:30]: Explain how bringing copy, code, and analytics into one workspace changes productivity.\n[CTA 0:31-0:45]: "Try Omnexa AI today and launch your next project in record time."`;
+
+                case 'finora':
+                    return `### FINORA FINANCIAL SUMMARY & BUDGET MODEL\nModel Basis: ${prompt}\n\nESTIMATED MONTHLY ALLOCATION:\n- Core Operations: 45%\n- Marketing & Acquisition: 25%\n- Reserves & Emergency Fund: 20%\n- Tool Subscriptions: 10%\n\n[NOTE: Demo model based on standard 50/30/20 budget framework]`;
+
+                case 'codepilot':
+                    return `// CODEPILOT GENERATED SNIPPET\n// Subject: ${prompt}\n// Tone/Mode: ${tone}\n\nfunction processWorkflow(inputData) {\n    if (!inputData) throw new Error("Invalid input vector");\n    \n    const optimizedOutput = inputData.map(item => ({\n        id: item.id,\n        status: 'PROCESSED',\n        timestamp: '${time}'\n    }));\n    \n    return optimizedOutput;\n}`;
+
+                case 'insightly':
+                    return `### INSIGHTLY DATA REPORT SUMMARY\nDataset Query: ${prompt}\n\nMETRIC HIGHLIGHTS:\n- Total Pipeline Conversion: +18.4% YoY\n- Customer Retention Rate: 94.2%\n- Primary Growth Driver: Automated Workflow Adoption\n\nRECOMMENDED ACTION: Double down on high-performing product channels.`;
+
+                default:
+                    return `### ${catId.toUpperCase()} AI WORKSPACE RESPONSE\nQuery Prompt: "${prompt}"\nTone Profile: ${tone}\nFormat Output: ${format}\n\n[STATUS OK] Omnexa AI successfully structured your request. Content is ready for copy or project archiving.`;
+            }
+        }
+
+        // Copy & Storage Actions
+        function copyOutput(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied output to clipboard!');
+            });
+        }
+
+        function saveToolProject(catId) {
+            const text = document.getElementById(`${catId}-output`).innerText;
+            const newItem = {
+                id: Date.now(),
+                catId: catId,
+                title: `${catId.toUpperCase()} Output - ${new Date().toLocaleTimeString()}`,
+                content: text
+            };
+            appState.savedItems.unshift(newItem);
+            localStorage.setItem('omnexa_saved', JSON.stringify(appState.savedItems));
+            renderSavedProjects();
+            showToast('Saved item to Projects');
+        }
+
+        function renderSavedProjects() {
+            const list = document.getElementById('saved-items-list');
+            const countEl = document.getElementById('stat-saved-count');
+            if (countEl) countEl.innerText = `${appState.savedItems.length} Items`;
+
+            if (appState.savedItems.length === 0) {
+                list.innerHTML = `<div style="color:var(--text-muted); font-size:0.9rem;">No saved projects yet. Generate content in any workspace to save items here.</div>`;
+                return;
+            }
+
+            list.innerHTML = appState.savedItems.map(item => `
+                <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:1rem; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div>
+                        <span class="badge" style="font-size:0.7rem;">${item.catId.toUpperCase()}</span>
+                        <h4 style="font-size:0.95rem; margin:0.35rem 0;">${item.title}</h4>
+                        <p style="font-size:0.8rem; color:var(--text-secondary); max-width:600px; max-height:40px; overflow:hidden;">${item.content}</p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm btn-icon" onclick="deleteSavedItem(${item.id})"><i data-lucide="trash-2"></i></button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function deleteSavedItem(id) {
+            appState.savedItems = appState.savedItems.filter(i => i.id !== id);
+            localStorage.setItem('omnexa_saved', JSON.stringify(appState.savedItems));
+            renderSavedProjects();
+            showToast('Deleted item');
+        }
+
+        // Assistant Chat Logic
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const box = document.getElementById('chat-messages-box');
+            box.innerHTML += `<div class="message-bubble message-user">${escapeHtml(query)}</div>`;
+            input.value = '';
+
+            box.scrollTop = box.scrollHeight;
+
+            setTimeout(() => {
+                const aiResponse = `I processed your request regarding "${query}". Based on Omnexa AI's integrated model logic, I recommend executing this through our specialized tool categories or implementing a direct workflow sequence.`;
+                box.innerHTML += `<div class="message-bubble message-ai">${aiResponse}</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 500);
+        }
+
+        function clearChat() {
+            document.getElementById('chat-messages-box').innerHTML = `<div class="message-bubble message-ai">Chat history cleared. How can I assist you now?</div>`;
+        }
+
+        // Settings Actions
+        function saveSettings() {
+            showToast('Workspace settings saved');
+        }
+
+        function clearAllData() {
+            if (confirm('Clear all local saved projects and settings?')) {
+                localStorage.clear();
+                appState.savedItems = [];
+                renderSavedProjects();
+                showToast('All local storage data cleared');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('app-modal').classList.remove('active');
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function handleGlobalSearch(query) {
+            if (!query.trim()) return;
+            // Quick navigation logic or search highlight trigger
+        }
+    </script>
+</body>
+</html>
