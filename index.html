@@ -6,6 +6,9 @@
     <title>Omnexa AI</title>
     <meta name="description" content="All-in-one AI workspace combining specialized tools for writing, coding, career, finance, education, social media, and business analytics.">
     
+    <!-- Tab Favicon Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230B0914'/><rect x='2' y='2' width='28' height='28' rx='6' fill='none' stroke='%23A855F7' stroke-width='1.5' stroke-opacity='0.4'/><text x='16' y='21' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='13' fill='%23A855F7' text-anchor='middle'>OX</text></svg>">
+
     <!-- Google Fonts & Lucide Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,46 +17,50 @@
     
     <style>
         :root {
-            /* Dark Theme Colors (Default) */
-            --bg-main: #0B0D12;
-            --bg-sidebar: #101319;
-            --bg-card: #151922;
-            --bg-elevated: #1A1F2A;
-            --text-primary: #F5F7FA;
-            --text-secondary: #9CA3AF;
-            --text-muted: #6B7280;
-            --border-color: #252B36;
-            --accent-primary: #8B5CF6;
-            --accent-secondary: #6366F1;
-            --accent-glow: rgba(139, 92, 246, 0.15);
+            /* Midnight Purple & Neon Violet Glass Theme */
+            --bg-main: #0B0914;
+            --bg-sidebar: rgba(17, 13, 33, 0.65);
+            --bg-card: rgba(23, 19, 43, 0.55);
+            --bg-elevated: rgba(35, 29, 64, 0.65);
+            --text-primary: #F3F4F6;
+            --text-secondary: #A098C2;
+            --text-muted: #6C6393;
+            --border-color: rgba(45, 37, 80, 0.6);
+            --border-hover: rgba(168, 85, 247, 0.6);
+            --accent-primary: #A855F7;
+            --accent-secondary: #8B5CF6;
+            --accent-glow: rgba(168, 85, 247, 0.25);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
             --success: #22C55E;
             --warning: #F59E0B;
             --error: #EF4444;
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
             --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
-            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 45px -5px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-glow);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         [data-theme="light"] {
-            --bg-main: #FFFFFF;
-            --bg-sidebar: #F8FAFC;
-            --bg-card: #FFFFFF;
-            --bg-elevated: #F1F5F9;
+            --bg-main: #F5F3FF;
+            --bg-sidebar: rgba(255, 255, 255, 0.75);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-elevated: rgba(237, 233, 254, 0.9);
             --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-muted: #94A3B8;
-            --border-color: #E2E8F0;
+            --text-secondary: #4C1D95;
+            --text-muted: #6D28D9;
+            --border-color: rgba(168, 85, 247, 0.25);
+            --border-hover: rgba(124, 58, 237, 0.6);
             --accent-primary: #7C3AED;
-            --accent-secondary: #6366F1;
-            --accent-glow: rgba(124, 58, 237, 0.08);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --accent-secondary: #6D28D9;
+            --accent-glow: rgba(124, 58, 237, 0.15);
+            --glass-highlight: rgba(255, 255, 255, 0.6);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
         }
 
         /* Base & Reset */
@@ -67,6 +74,26 @@
             overflow-x: hidden;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* AMBIENT BLOBS FOR LIQUID GLASS REFRACTION */
+        .ambient-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.55;
+            animation: floatBlob 20s ease-in-out infinite alternate;
+        }
+        .blob-1 { width: 500px; height: 500px; background: rgba(168, 85, 247, 0.25); top: 5%; left: -5%; }
+        .blob-2 { width: 450px; height: 450px; background: rgba(139, 92, 246, 0.2); bottom: 10%; right: -5%; animation-delay: -6s; }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -50px) scale(1.08); }
+            100% { transform: translate(-30px, 40px) scale(0.94); }
         }
 
         /* Utility Components */
@@ -89,24 +116,27 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: #FFFFFF;
-            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
 
         .btn-primary:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
         }
 
         .btn-secondary {
-            background-color: var(--bg-elevated);
+            background: var(--bg-elevated);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: var(--text-primary);
-            border-color: var(--border-color);
+            border: 1px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background-color: var(--border-color);
-            color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         .btn-sm { padding: 0.4rem 0.75rem; font-size: 0.8rem; }
@@ -116,13 +146,13 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.25rem 0.625rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
             background: var(--accent-glow);
             color: var(--accent-primary);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.35);
         }
 
         .form-group { display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 1rem; }
@@ -130,7 +160,8 @@
         .form-control, .form-select {
             width: 100%;
             padding: 0.625rem 0.875rem;
-            background-color: var(--bg-main);
+            background: rgba(11, 9, 20, 0.6);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             color: var(--text-primary);
@@ -147,6 +178,26 @@
 
         textarea.form-control { min-height: 100px; resize: vertical; }
 
+        /* SUGGESTION CHIPS STYLING */
+        .chip-group {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;
+        }
+        .suggestion-chip {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .suggestion-chip:hover, .suggestion-chip.selected {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+        }
+
         /* Toast Notifications */
         #toast-container {
             position: fixed;
@@ -160,7 +211,8 @@
         }
 
         .toast {
-            background-color: var(--bg-elevated);
+            background: var(--bg-elevated);
+            backdrop-filter: blur(16px);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
             padding: 0.75rem 1rem;
@@ -183,8 +235,8 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -195,7 +247,8 @@
 
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-box {
-            background-color: var(--bg-card);
+            background: var(--bg-card);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             width: 90%; max-width: 500px;
@@ -210,17 +263,17 @@
         .modal-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
 
         /* Public Landing Page */
-        #public-landing { width: 100%; display: block; }
+        #public-landing { width: 100%; display: block; position: relative; z-index: 2; }
         
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
-            background: rgba(11, 13, 18, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(11, 9, 20, 0.65);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
             border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
+            padding: 1rem 5%;
             display: flex; justify-content: space-between; align-items: center;
         }
-        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.85); }
 
         .brand-logo {
             display: flex; align-items: center; gap: 0.625rem;
@@ -243,7 +296,7 @@
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4.25rem);
             font-weight: 800; line-height: 1.1; margin: 1.25rem 0;
-            background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
@@ -259,7 +312,8 @@
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
             background: var(--bg-card);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 80px var(--accent-glow);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
             overflow: hidden; padding: 0.5rem;
         }
         .hero-preview-bar {
@@ -272,26 +326,62 @@
 
         .section-padding { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 3.5rem; }
-        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem; }
         .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+        /* REAL-TIME CALCULATOR CARD */
+        .calculator-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            box-shadow: inset 0 1px 1px var(--glass-highlight);
+        }
+
+        .slider-control {
+            width: 100%; margin: 1.5rem 0;
+            accent-color: var(--accent-primary);
+        }
+
+        /* PROBLEM VS SOLUTION MATRIX */
+        .matrix-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 5rem;
+        }
+        .matrix-box {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+        .matrix-box.solution {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
 
         .categories-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem;
         }
 
         .cat-card {
-            background-color: var(--bg-card);
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             transition: var(--transition);
             cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: inset 0 1px 1px var(--glass-highlight);
         }
 
         .cat-card:hover {
-            border-color: var(--accent-primary);
+            border-color: var(--border-hover);
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px -5px var(--accent-glow);
+            box-shadow: var(--shadow-lg);
         }
 
         .cat-icon {
@@ -301,32 +391,25 @@
             margin-bottom: 1.25rem; font-size: 1.25rem;
         }
 
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .price-card {
-            background-color: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column;
-            position: relative;
-        }
-        .price-card.featured { border-color: var(--accent-primary); box-shadow: 0 0 30px var(--accent-glow); }
-
         .faq-accordion { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-        .faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+        .faq-item { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
         .faq-question { padding: 1.25rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-answer { padding: 0 1.25rem 1.25rem; color: var(--text-secondary); display: none; font-size: 0.9375rem; }
         .faq-item.active .faq-answer { display: block; }
 
         footer {
             border-top: 1px solid var(--border-color);
-            padding: 4rem 2rem 2rem; background: var(--bg-sidebar); margin-top: 4rem;
+            padding: 4rem 2rem 2rem; background: var(--bg-sidebar); backdrop-filter: blur(20px); margin-top: 4rem; position: relative; z-index: 2;
         }
 
         /* Dashboard Architecture */
-        #app-dashboard { display: none; min-height: 100vh; background: var(--bg-main); }
+        #app-dashboard { display: none; min-height: 100vh; background: var(--bg-main); position: relative; z-index: 2; }
         .dash-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; }
 
         /* Sidebar */
         .sidebar {
-            width: 260px; background-color: var(--bg-sidebar);
+            width: 260px; background: var(--bg-sidebar);
+            backdrop-filter: blur(25px);
             border-right: 1px solid var(--border-color);
             display: flex; flex-direction: column;
             transition: var(--transition); flex-shrink: 0; z-index: 40;
@@ -345,11 +428,11 @@
         }
 
         .nav-item:hover, .nav-item.active {
-            background-color: var(--bg-elevated); color: var(--text-primary);
+            background: var(--bg-elevated); color: var(--text-primary);
         }
 
         .nav-item.active {
-            color: var(--accent-primary); font-weight: 600;
+            color: var(--accent-primary); font-weight: 600; border: 1px solid var(--border-color);
         }
 
         .nav-item i { font-size: 1.1rem; width: 20px; }
@@ -358,7 +441,8 @@
         .main-wrapper { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
         .topbar {
-            height: 64px; background-color: var(--bg-sidebar);
+            height: 64px; background: var(--bg-sidebar);
+            backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--border-color);
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 1.5rem; flex-shrink: 0;
@@ -377,7 +461,7 @@
 
         .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
 
-        .content-area { flex: 1; overflow-y: auto; padding: 1.75rem; background-color: var(--bg-main); }
+        .content-area { flex: 1; overflow-y: auto; padding: 1.75rem; background: var(--bg-main); }
 
         /* Workspace Views */
         .workspace-view { display: none; }
@@ -390,14 +474,15 @@
         @media (max-width: 1024px) { .tool-layout { grid-template-columns: 1fr; } }
 
         .panel-card {
-            background-color: var(--bg-card);
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 1.5rem; box-shadow: var(--shadow-sm);
         }
 
         .output-box {
-            background-color: var(--bg-main);
+            background: var(--bg-main);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             padding: 1rem; min-height: 250px; font-size: 0.875rem;
@@ -406,7 +491,7 @@
         }
 
         .output-box.code-mode {
-            font-family: var(--font-mono); font-size: 0.8125rem; background: #07090D; color: #E2E8F0;
+            font-family: var(--font-mono); font-size: 0.8125rem; background: #07060D; color: #E2E8F0;
         }
 
         .output-toolbar { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.75rem; }
@@ -415,12 +500,12 @@
         .chat-container { display: flex; flex-direction: column; height: calc(100vh - 120px); }
         .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
         .message-bubble { max-width: 75%; padding: 0.875rem 1.125rem; border-radius: var(--radius-lg); font-size: 0.875rem; line-height: 1.5; }
-        .message-user { align-self: flex-end; background-color: var(--accent-primary); color: #FFF; border-bottom-right-radius: 2px; }
-        .message-ai { align-self: flex-start; background-color: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-left-radius: 2px; }
+        .message-user { align-self: flex-end; background: var(--accent-primary); color: #FFF; border-bottom-right-radius: 2px; }
+        .message-ai { align-self: flex-start; background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-left-radius: 2px; }
 
         /* Dashboard Overview Grid */
         .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-md); }
+        .stat-card { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: var(--radius-md); }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
@@ -428,10 +513,15 @@
             .sidebar.mobile-open { left: 0; }
             .topbar-search { display: none; }
             .hero h1 { font-size: 2.25rem; }
+            .matrix-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+    <!-- AMBIENT BLOBS -->
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
 
     <!-- Toast Notification Container -->
     <div id="toast-container"></div>
@@ -457,10 +547,11 @@
             <ul class="nav-links">
                 <li><a href="#features" class="nav-link">Features</a></li>
                 <li><a href="#categories" class="nav-link">AI Tools</a></li>
-                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#calculator" class="nav-link">Savings Calculator</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
             </ul>
             <div style="display: flex; gap: 0.75rem; align-items: center;">
+                <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22C55E; border-color: rgba(34, 197, 94, 0.3);">● 13 AI Engines Operational ⚡</span>
                 <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" aria-label="Toggle Theme"><i data-lucide="sun" class="theme-icon"></i></button>
                 <button class="btn btn-primary" onclick="launchApp('dashboard')">Launch Dashboard</button>
             </div>
@@ -500,6 +591,60 @@
             </div>
         </section>
 
+        <!-- REAL-TIME PRODUCTIVITY & TIME SAVED CALCULATOR -->
+        <section id="calculator" class="section-padding">
+            <div class="section-header">
+                <span class="badge">ROI Estimator</span>
+                <h2 class="section-title">Calculate Your Time & Cost Savings</h2>
+                <p class="section-desc">See how much time and money Omnexa AI saves your team weekly.</p>
+            </div>
+            <div class="calculator-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="form-label" style="font-size: 1rem;">Hours spent weekly on writing &amp; coding:</label>
+                    <span id="hours-val" style="font-size: 1.25rem; font-weight: 800; color: var(--accent-primary);">15 Hours</span>
+                </div>
+                <input type="range" min="2" max="40" value="15" class="slider-control" id="hours-slider" oninput="updateCalculator(this.value)">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; text-align: center;">
+                    <div style="background: var(--bg-elevated); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Weekly Hours Saved</span>
+                        <div id="saved-hours" style="font-size: 2.2rem; font-weight: 800; color: var(--accent-primary); margin-top: 0.25rem;">11.2 hrs</div>
+                    </div>
+                    <div style="background: var(--bg-elevated); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Estimated Monthly Savings</span>
+                        <div id="saved-money" style="font-size: 2.2rem; font-weight: 800; color: var(--success); margin-top: 0.25rem;">$1,120</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEM VS SOLUTION COMPARISON MATRIX -->
+        <section class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Traditional Tools vs. Omnexa AI Workspace</h2>
+            </div>
+            <div class="matrix-grid">
+                <div class="matrix-box">
+                    <h3 style="font-size: 1.2rem; color: var(--error); margin-bottom: 1rem;">🐌 Traditional Fragmented Workflows</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li>❌ Paying for 5+ separate AI subscriptions ($150+/mo)</li>
+                        <li>❌ Constant context switching and tab clutter</li>
+                        <li>❌ Manual typing and prompt engineering from scratch</li>
+                        <li>❌ Unclear data privacy and remote storage logging</li>
+                    </ul>
+                </div>
+                <div class="matrix-box solution">
+                    <h3 style="font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 1rem;">⚡ Omnexa AI Unified Platform</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-primary); font-size: 0.9rem;">
+                        <li>✔ 13 specialized AI productivity suites in 1 dashboard</li>
+                        <li>✔ Pre-built clickable suggestion chips (Zero manual typing needed)</li>
+                        <li>✔ One-click prompt enhancement & multi-model toggle</li>
+                        <li>✔ 100% Client-side local data storage & zero-log privacy</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <section id="categories" class="section-padding">
             <div class="section-header">
                 <span class="badge">Comprehensive Suite</span>
@@ -508,6 +653,31 @@
             </div>
             <div class="categories-grid" id="landing-categories-grid">
                 <!-- Rendered Dynamically -->
+            </div>
+        </section>
+
+        <!-- LIVE AI OUTPUT SHOWCASE / GALLERY -->
+        <section class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Real Outputs Generated by Omnexa AI</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="cat-card">
+                    <span class="badge" style="margin-bottom: 0.5rem;">CodePilot AI</span>
+                    <h4 style="margin-bottom: 0.5rem;">Optimized Python Script</h4>
+                    <pre style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); background: rgba(0,0,0,0.4); padding: 0.75rem; border-radius: 6px;">def optimize_data(df):
+    return df.drop_duplicates().fillna(0)</pre>
+                </div>
+                <div class="cat-card">
+                    <span class="badge" style="margin-bottom: 0.5rem;">WriteFlow AI</span>
+                    <h4 style="margin-bottom: 0.5rem;">High-Convert Sales Copy</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">"Unlock instant developer speed with our single-file glassmorphic dashboard..."</p>
+                </div>
+                <div class="cat-card">
+                    <span class="badge" style="margin-bottom: 0.5rem;">Finora AI</span>
+                    <h4 style="margin-bottom: 0.5rem;">Structured Budget Model</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">45% Core Ops | 25% Acquisition | 20% Reserve | 10% Tools</p>
+                </div>
             </div>
         </section>
 
@@ -524,48 +694,15 @@
                         <p style="color:var(--text-secondary); font-size:0.9rem;">Access content generation, code output, financial modeling, and data analytics without switching tabs.</p>
                     </div>
                     <div style="background: var(--bg-card); padding: 1.75rem; border-radius: var(--radius-lg); border:1px solid var(--border-color);">
-                        <i data-lucide="hard-drive" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
-                        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Local Data Persistence</h3>
-                        <p style="color:var(--text-secondary); font-size:0.9rem;">Your project history, saved prompts, and settings are preserved directly inside your browser storage.</p>
+                        <i data-lucide="shield-check" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
+                        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Zero-Data Logging Privacy</h3>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">Your project history, saved prompts, and settings are preserved directly inside your local browser storage.</p>
                     </div>
                     <div style="background: var(--bg-card); padding: 1.75rem; border-radius: var(--radius-lg); border:1px solid var(--border-color);">
                         <i data-lucide="sliders" style="color:var(--accent-primary); margin-bottom:1rem;"></i>
                         <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">Precision Control Knobs</h3>
                         <p style="color:var(--text-secondary); font-size:0.9rem;">Fine-tune tone, audience target, complexity level, and code languages with dedicated control suites.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="section-padding">
-            <div class="section-header">
-                <span class="badge">Pricing Plans</span>
-                <h2 class="section-title">Simple, Transparent Pricing</h2>
-                <p class="section-desc">Choose the ideal workspace plan for your productivity needs. (Illustrative Demo Pricing)</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <h3 style="font-size: 1.25rem;">Starter Plan</h3>
-                    <div style="font-size: 2.25rem; font-weight: 800; margin: 1rem 0;">$0 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">/ month</span></div>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Perfect for exploring Omnexa AI tools.</p>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; font-size: 0.875rem; color: var(--text-secondary);">
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Access to all 13 AI Categories</li>
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Basic response generation</li>
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> LocalStorage data saving</li>
-                    </ul>
-                    <button class="btn btn-secondary" onclick="launchApp('dashboard')">Start Free Demo</button>
-                </div>
-                <div class="price-card featured">
-                    <span class="badge" style="position: absolute; top: -12px; right: 20px;">Most Popular</span>
-                    <h3 style="font-size: 1.25rem;">Pro Workspace</h3>
-                    <div style="font-size: 2.25rem; font-weight: 800; margin: 1rem 0;">$29 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">/ month</span></div>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">For power users and independent professionals.</p>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; font-size: 0.875rem; color: var(--text-secondary);">
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Everything in Starter</li>
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Unlimited local saved projects</li>
-                        <li><i data-lucide="check" style="color: var(--success); width: 16px;"></i> Advanced code & data analytics</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="launchApp('dashboard')">Launch Pro Dashboard</button>
                 </div>
             </div>
         </section>
@@ -586,7 +723,7 @@
                     </div>
                     <div class="faq-item" onclick="toggleFaq(this)">
                         <div class="faq-question">Are the AI outputs functional? <i data-lucide="chevron-down"></i></div>
-                        <div class="faq-answer">Yes, all 13 tool categories feature dynamic input controls that generate tailored, context-aware sample results ready to copy and save.</div>
+                        <div class="faq-answer">Yes, all 13 tool categories feature dynamic input controls and pre-built suggestion chips that generate tailored, context-aware sample results ready to copy and save.</div>
                     </div>
                 </div>
             </div>
@@ -619,14 +756,13 @@
                     <button class="nav-item active" onclick="switchTab('overview')"><i data-lucide="layout-dashboard"></i> Overview</button>
                     <button class="nav-item" onclick="switchTab('assistant')"><i data-lucide="bot"></i> AI Assistant</button>
                     <button class="nav-item" onclick="switchTab('projects')"><i data-lucide="folder"></i> Saved Projects</button>
-                    <button class="nav-item" onclick="switchTab('history')"><i data-lucide="clock"></i> Recent History</button>
                     
                     <div class="menu-label">13 AI Categories</div>
                     <div id="sidebar-categories-list">
                         <!-- Dynamic Sidebar Nav Items -->
                     </div>
 
-                    <div class="menu-label">Account & System</div>
+                    <div class="menu-label">Account &amp; System</div>
                     <button class="nav-item" onclick="switchTab('settings')"><i data-lucide="settings"></i> Workspace Settings</button>
                 </div>
             </aside>
@@ -744,21 +880,21 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data Registry for 13 AI Categories
+        // Data Registry for 13 AI Categories with Smart Suggestions
         const CATEGORIES = [
-            { id: 'writeflow', name: 'WriteFlow AI', icon: 'pen-tool', desc: 'Content creation, blog posts, and marketing copy suite.', color: '#8B5CF6' },
-            { id: 'careerly', name: 'Careerly AI', icon: 'briefcase', desc: 'Resume builder, cover letters, and interview prep assistant.', color: '#3B82F6' },
-            { id: 'siteforge', name: 'SiteForge AI', icon: 'globe', desc: 'Website planning, landing page briefs, and structural copy.', color: '#10B981' },
-            { id: 'clipora', name: 'Clipora AI', icon: 'video', desc: 'Video scripts for YouTube, TikTok, and Reels with hooks.', color: '#EF4444' },
-            { id: 'finora', name: 'Finora AI', icon: 'pie-chart', desc: 'Financial planning, budget modeling, and expense analysis.', color: '#F59E0B' },
-            { id: 'studypilot', name: 'StudyPilot AI', icon: 'book-open', desc: 'Study notes summarizer, quiz builder, and flashcard generator.', color: '#6366F1' },
-            { id: 'supportly', name: 'Supportly AI', icon: 'message-square', desc: 'Customer support response builder and ticket management.', color: '#06B6D4' },
-            { id: 'socialpilot', name: 'SocialPilot AI', icon: 'share-2', desc: 'Social media captions, hashtags, and post calendar planner.', color: '#EC4899' },
-            { id: 'estateiq', name: 'EstateIQ AI', icon: 'home', desc: 'Property listings, investment ROI, and lead descriptions.', color: '#14B8A6' },
-            { id: 'meetmind', name: 'MeetMind AI', icon: 'calendar', desc: 'Meeting summary generator, agendas, and action items.', color: '#84CC16' },
-            { id: 'pixelmind', name: 'PixelMind AI', icon: 'image', desc: 'Midjourney/DALL-E prompt builder and visual concept briefs.', color: '#A855F7' },
-            { id: 'codepilot', name: 'CodePilot AI', icon: 'code', desc: 'Code generator, snippet explanation, and debug assistant.', color: '#06B6D4' },
-            { id: 'insightly', name: 'Insightly AI', icon: 'bar-chart-3', desc: 'Data analytics assistant, report summaries, and metric insights.', color: '#64748B' }
+            { id: 'writeflow', name: 'WriteFlow AI', icon: 'pen-tool', desc: 'Content creation, blog posts, and marketing copy suite.', suggestions: ['High-converting cold outreach email', 'SaaS product launch announcement', 'SEO blog article outline', 'Persuasive ad copy headline'] },
+            { id: 'careerly', name: 'Careerly AI', icon: 'briefcase', desc: 'Resume builder, cover letters, and interview prep assistant.', suggestions: ['Senior Frontend Developer cover letter', 'Product Manager resume summary', 'Technical interview prep Q&A', 'LinkedIn profile bio'] },
+            { id: 'siteforge', name: 'SiteForge AI', icon: 'globe', desc: 'Website planning, landing page briefs, and structural copy.', suggestions: ['Digital Agency landing page brief', 'E-commerce hero section copy', 'SaaS features section matrix', 'Portfolio website layout'] },
+            { id: 'clipora', name: 'Clipora AI', icon: 'video', desc: 'Video scripts for YouTube, TikTok, and Reels with hooks.', suggestions: ['Viral TikTok product review hook', '10-minute YouTube video outline', 'Instagram Reel tutorial script', 'Short YouTube Shorts script'] },
+            { id: 'finora', name: 'Finora AI', icon: 'pie-chart', desc: 'Financial planning, budget modeling, and expense analysis.', suggestions: ['50/30/20 Monthly budget model', 'SaaS startup runway forecast', 'Freelance tax savings breakdown', 'Investment ROI calculator'] },
+            { id: 'studypilot', name: 'StudyPilot AI', icon: 'book-open', desc: 'Study notes summarizer, quiz builder, and flashcard generator.', suggestions: ['Computer Science study summary', 'JavaScript practice quiz', 'Biology exam flashcards', 'Essay outline on AI ethics'] },
+            { id: 'supportly', name: 'Supportly AI', icon: 'message-square', desc: 'Customer support response builder and ticket management.', suggestions: ['Polite refund request reply', 'Feature request follow-up email', 'Technical bug troubleshooting', 'Billing inquiry resolution'] },
+            { id: 'socialpilot', name: 'SocialPilot AI', icon: 'share-2', desc: 'Social media captions, hashtags, and post calendar planner.', suggestions: ['7-day LinkedIn post thread', 'Instagram hashtag strategy', 'Twitter/X product launch thread', 'Facebook engagement post'] },
+            { id: 'estateiq', name: 'EstateIQ AI', icon: 'home', desc: 'Property listings, investment ROI, and lead descriptions.', suggestions: ['Luxury penthouse listing description', 'Commercial real estate pitch', 'Rental yield analysis summary', 'First-time homebuyer guide'] },
+            { id: 'meetmind', name: 'MeetMind AI', icon: 'calendar', desc: 'Meeting summary generator, agendas, and action items.', suggestions: ['Product sprint meeting agenda', 'Client onboarding call summary', 'Quarterly sales review notes', 'Brainstorming session action items'] },
+            { id: 'pixelmind', name: 'PixelMind AI', icon: 'image', desc: 'Midjourney/DALL-E prompt builder and visual concept briefs.', suggestions: ['Cyberpunk glassmorphic UI layout', 'Photorealistic luxury watch render', 'Minimalist vector logo concept', '3D neon isometric cityscape'] },
+            { id: 'codepilot', name: 'CodePilot AI', icon: 'code', desc: 'Code generator, snippet explanation, and debug assistant.', suggestions: ['Refactor Python function for speed', 'Clean JavaScript async/await fetch', 'SQL query with JOINs and GROUP BY', 'Fix React useEffect state bug'] },
+            { id: 'insightly', name: 'Insightly AI', icon: 'bar-chart-3', desc: 'Data analytics assistant, report summaries, and metric insights.', suggestions: ['Monthly sales conversion report', 'User retention metrics analysis', 'Google Analytics traffic breakdown', 'Customer churn rate insights'] }
         ];
 
         // State Management
@@ -778,6 +914,34 @@
             renderSavedProjects();
             lucide.createIcons();
         });
+
+        // Real-Time Savings Calculator Update
+        function updateCalculator(hours) {
+            document.getElementById('hours-val').innerText = `${hours} Hours`;
+            const savedHours = (hours * 0.75).toFixed(1);
+            const savedMoney = (hours * 0.75 * 25 * 4).toLocaleString();
+            document.getElementById('saved-hours').innerText = `${savedHours} hrs`;
+            document.getElementById('saved-money').innerText = `$${savedMoney}`;
+        }
+
+        // Apply Suggestion Chip Click
+        function applyChip(catId, value) {
+            const el = document.getElementById(`${catId}-prompt`);
+            if (el) el.value = value;
+        }
+
+        // One-Click Prompt Optimizer ("Enhance Prompt ✨")
+        function enhancePrompt(catId) {
+            const el = document.getElementById(`${catId}-prompt`);
+            if (!el) return;
+            const text = el.value.trim();
+            if (!text) {
+                showToast('Type a short idea first to enhance!');
+                return;
+            }
+            el.value = `Act as an expert level engineer. Provide a detailed, high-performance, structured solution for: "${text}". Ensure clean execution and step-by-step clarity.`;
+            showToast('Prompt enhanced with magic wand! ✨');
+        }
 
         // Theme Engine
         function initTheme() {
@@ -810,7 +974,7 @@
         }
 
         // Toast Notification System
-        function showToast(message, type = 'info') {
+        function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
@@ -908,6 +1072,10 @@
         }
 
         function getToolWorkspaceHTML(cat) {
+            const chipsHTML = cat.suggestions.map(s => `
+                <span class="suggestion-chip" onclick="applyChip('${cat.id}', '${s.replace(/'/g, "\\'")}')">${s}</span>
+            `).join('');
+
             return `
                 <div id="view-${cat.id}" class="workspace-view">
                     <div style="margin-bottom: 1.5rem;">
@@ -919,12 +1087,28 @@
                     <div class="tool-layout">
                         <!-- Input Control Panel -->
                         <div class="panel-card">
-                            <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 700;">Parameters &amp; Context</h3>
+                            <h3 style="font-size: 1rem; margin-bottom: 0.75rem; font-weight: 700;">Parameters &amp; Context</h3>
+                            
+                            <label class="form-label" style="margin-bottom: 0.25rem;">Click a pre-built suggestion chip:</label>
+                            <div class="chip-group">${chipsHTML}</div>
+
                             <div class="form-group">
-                                <label class="form-label">Primary Request / Prompt Context</label>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <label class="form-label">Or type custom requirements:</label>
+                                    <button class="btn btn-secondary btn-sm" onclick="enhancePrompt('${cat.id}')" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Enhance Prompt ✨</button>
+                                </div>
                                 <textarea class="form-control" id="${cat.id}-prompt" placeholder="Describe what you need generated in detail..."></textarea>
                             </div>
+
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">AI Engine Model</label>
+                                    <select class="form-select" id="${cat.id}-model">
+                                        <option value="Omnexa Core v4.5">Omnexa Core v4.5</option>
+                                        <option value="Ultra Code Engine">Ultra Code Engine</option>
+                                        <option value="Vision Studio v2">Vision Studio v2</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-label">Tone &amp; Style</label>
                                     <select class="form-select" id="${cat.id}-tone">
@@ -932,14 +1116,6 @@
                                         <option value="Creative & Bold">Creative &amp; Bold</option>
                                         <option value="Technical & Precise">Technical &amp; Precise</option>
                                         <option value="Casual & Engaging">Casual &amp; Engaging</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Output Format</label>
-                                    <select class="form-select" id="${cat.id}-format">
-                                        <option value="Detailed Breakdown">Detailed Breakdown</option>
-                                        <option value="Executive Summary">Executive Summary</option>
-                                        <option value="Action Bullet Points">Action Bullet Points</option>
                                     </select>
                                 </div>
                             </div>
@@ -952,7 +1128,6 @@
                         <div class="panel-card">
                             <h3 style="font-size: 1rem; margin-bottom: 1rem; font-weight: 700;">Generated Workspace Output</h3>
                             <div class="output-box ${cat.id === 'codepilot' ? 'code-mode' : ''}" id="${cat.id}-output">
-                                <!-- Generated result appears here -->
                                 Click "Generate ${cat.name} Output" to run the local AI model response simulation.
                             </div>
                             <div class="output-toolbar">
@@ -969,23 +1144,23 @@
         function generateToolOutput(catId) {
             const prompt = document.getElementById(`${catId}-prompt`).value.trim();
             const tone = document.getElementById(`${catId}-tone`).value;
-            const format = document.getElementById(`${catId}-format`).value;
+            const model = document.getElementById(`${catId}-model`).value;
             const outputBox = document.getElementById(`${catId}-output`);
 
-            outputBox.innerText = `[OMNEXA AI PROCESSOR] Synthesizing context...\nTone: ${tone} | Format: ${format}\n\nGenerating output...`;
+            outputBox.innerText = `[${model.toUpperCase()}] Synthesizing context...\nTone: ${tone}\n\nGenerating output...`;
 
             setTimeout(() => {
-                const response = getSimulatedResponse(catId, prompt || 'Standard strategic request', tone, format);
+                const response = getSimulatedResponse(catId, prompt || 'Standard strategic request', tone, model);
                 outputBox.innerText = response;
                 showToast(`Generated output for ${catId.toUpperCase()} AI`);
             }, 600);
         }
 
-        function getSimulatedResponse(catId, prompt, tone, format) {
+        function getSimulatedResponse(catId, prompt, tone, model) {
             const time = new Date().toLocaleDateString();
             switch (catId) {
                 case 'writeflow':
-                    return `### WRITEFLOW AI SYNTHESIS (${tone})\nTarget Subject: ${prompt}\n\n1. Executive Pitch:\n"Elevate your operational efficiency with Omnexa AI. Designed to convert complex ideas into actionable workflows seamlessly."\n\n2. Key Value Messaging Points:\n- Unified multi-tool suite eliminates context switching.\n- High-velocity AI output structured for immediate deployment.\n- Data privacy prioritized through local storage logic.`;
+                    return `### WRITEFLOW AI SYNTHESIS (${tone})\nEngine: ${model}\nSubject: ${prompt}\n\n1. Executive Pitch:\n"Elevate your operational efficiency with Omnexa AI. Designed to convert complex ideas into actionable workflows seamlessly."\n\n2. Key Value Messaging Points:\n- Unified multi-tool suite eliminates context switching.\n- High-velocity AI output structured for immediate deployment.\n- Data privacy prioritized through local storage logic.`;
 
                 case 'careerly':
                     return `### CAREERLY AI SUMMARY & COVER PROFILE\nPosition Target: ${prompt}\nTone Setting: ${tone}\n\nPROFESSIONAL SUMMARY:\nDriven and results-oriented specialist with proven expertise in implementing high-impact solutions. Adept at turning high-level goals into structured technical deliverables.\n\nRECOMMENDED CORE COMPETENCIES:\n- Strategic Workflow Optimization\n- Technical Project Execution\n- Cross-functional Team Integration`;
@@ -1000,13 +1175,13 @@
                     return `### FINORA FINANCIAL SUMMARY & BUDGET MODEL\nModel Basis: ${prompt}\n\nESTIMATED MONTHLY ALLOCATION:\n- Core Operations: 45%\n- Marketing & Acquisition: 25%\n- Reserves & Emergency Fund: 20%\n- Tool Subscriptions: 10%\n\n[NOTE: Demo model based on standard 50/30/20 budget framework]`;
 
                 case 'codepilot':
-                    return `// CODEPILOT GENERATED SNIPPET\n// Subject: ${prompt}\n// Tone/Mode: ${tone}\n\nfunction processWorkflow(inputData) {\n    if (!inputData) throw new Error("Invalid input vector");\n    \n    const optimizedOutput = inputData.map(item => ({\n        id: item.id,\n        status: 'PROCESSED',\n        timestamp: '${time}'\n    }));\n    \n    return optimizedOutput;\n}`;
+                    return `// CODEPILOT GENERATED SNIPPET (${model})\n// Subject: ${prompt}\n// Mode: ${tone}\n\nfunction processWorkflow(inputData) {\n    if (!inputData) throw new Error("Invalid input vector");\n    \n    const optimizedOutput = inputData.map(item => ({\n        id: item.id,\n        status: 'PROCESSED',\n        timestamp: '${time}'\n    }));\n    \n    return optimizedOutput;\n}`;
 
                 case 'insightly':
                     return `### INSIGHTLY DATA REPORT SUMMARY\nDataset Query: ${prompt}\n\nMETRIC HIGHLIGHTS:\n- Total Pipeline Conversion: +18.4% YoY\n- Customer Retention Rate: 94.2%\n- Primary Growth Driver: Automated Workflow Adoption\n\nRECOMMENDED ACTION: Double down on high-performing product channels.`;
 
                 default:
-                    return `### ${catId.toUpperCase()} AI WORKSPACE RESPONSE\nQuery Prompt: "${prompt}"\nTone Profile: ${tone}\nFormat Output: ${format}\n\n[STATUS OK] Omnexa AI successfully structured your request. Content is ready for copy or project archiving.`;
+                    return `### ${catId.toUpperCase()} AI WORKSPACE RESPONSE\nEngine Model: ${model}\nQuery Prompt: "${prompt}"\nTone Profile: ${tone}\n\n[STATUS OK] Omnexa AI successfully structured your request. Content is ready for copy or project archiving.`;
             }
         }
 
@@ -1043,7 +1218,7 @@
             }
 
             list.innerHTML = appState.savedItems.map(item => `
-                <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:1rem; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:flex-start;">
+                <div style="background:var(--bg-card); backdrop-filter:blur(16px); border:1px solid var(--border-color); padding:1rem; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:flex-start;">
                     <div>
                         <span class="badge" style="font-size:0.7rem;">${item.catId.toUpperCase()}</span>
                         <h4 style="font-size:0.95rem; margin:0.35rem 0;">${item.title}</h4>
@@ -1109,7 +1284,6 @@
 
         function handleGlobalSearch(query) {
             if (!query.trim()) return;
-            // Quick navigation logic or search highlight trigger
         }
     </script>
 </body>
